@@ -1,0 +1,22 @@
+# Builds best with doxygen 1.16
+PROJECT_NAME          = "ADCT Python"
+PROJECT_BRIEF         = "Python client API implementation for publishing ADCT data"
+OUTPUT_DIRECTORY      = doc/generated
+INPUT                 = ./src/adctk
+RECURSIVE             = YES
+FILE_PATTERNS = *.py
+INLINE_SOURCES = YES
+GENERATE_LATEX        = NO
+GENERATE_MAN          = NO
+GENERATE_RTF          = NO
+GENERATE_XML          = NO
+GENERATE_HTML         = YES
+OPTIMIZE_OUTPUT_FOR_C = NO
+OPTIMIZE_OUTPUT_JAVA = YES
+JAVADOC_AUTOBRIEF = YES
+#PYTHON_DOCSTRING = YES
+EXTENSION_MAPPING = .py=Python
+EXTRACT_ALL = YES
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_FILE_EXTENSION    = .html

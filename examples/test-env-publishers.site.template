@@ -1,0 +1,26 @@
+# load any lmod modules needed at your site
+# module purge
+# module load my_python
+
+# define a global directory for multifile plugin dumps
+# ADC_FS_ROOT=/somewhere/adct
+
+# define your adct rest-api server ingest url, if you have one
+# TEST_ADC_URL="https://YourServer/log"
+
+# define any other common variables for your site.
+
+# capture which cluster we are running on
+#if test -n $MYCLUSTER; then
+#	SYS=sys-$somecluster
+#fi
+
+# capture slurm info, if it exists, for multifile plugin
+#if test -n $SLURM_JOBID; then
+#	JOBID=job-$SLURM_JOBID
+#fi
+
+# create compound jobid string if multiple clusters on your site
+#if test -n "$SYS" -a -n "$JOBID"; then
+#	JOBID=.$JOBID
+#fi

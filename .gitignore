@@ -1,0 +1,16 @@
+__pycache__
+.venv*
+.pytest_cache
+*.pyc
+*.un
+*.un~
+*.un*
+*~
+*.coverage
+*.swp
+.vscode/
+*.egg-info
+dist
+build
+venv/
+docs/

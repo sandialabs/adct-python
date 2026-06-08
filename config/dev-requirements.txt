@@ -1,0 +1,11 @@
+build
+numpy
+pylint
+pytest
+pytest-cov
+requests
+setuptools
+twine
+wheel
+jsonschema
+genson

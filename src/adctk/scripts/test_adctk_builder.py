@@ -2,8 +2,8 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 #
-import numpy
 import array
+import numpy
 import adctk
 #import adctk.adc_types
 #import adctk.builder
@@ -24,23 +24,23 @@ file_config = { "DIRECTORY": "./test.outputs",
 
 # config w/file_config and call initialize.
 def test_publisher( pub: adctk.Publisher,  b: adctk.Builder) -> int :
-    err = 0;
-    e = 0;
+    err = 0
+    e = 0
     err = pub.config(**file_config)
     if err:
         print(f"config failed {err}")
-        e += 1;
+        e += 1
     err = pub.initialize()
     if err:
         print(f"initialize failed {err}")
-        e += 1;
-        err = 0;
-    err = pub.publish(b); # there should be 1 b in the output
+        e += 1
+        err = 0
+    err = pub.publish(b) # there should be 1 b in the output
     if err:
         print(f"publish 1 failed {err}")
-        e += 1;
-        err = 0;
-    return e;
+        e += 1
+        err = 0
+    return e
 
 def not_scalar_or_string(var):
     # returns False for numeric scalars and standard strings
@@ -153,7 +153,7 @@ def roundtrip_array(name: str, val: any, cptype: adctk.adc_types.ScalarType, cou
                 print(f"[{i}]: {ck.data[i]} vs {val[i]}")
     if not bad:
         print(" ok")
-        return;
+        return
     print("\nBAD", end='')
     print(f"\tkt: {ck.kt}", end='')
     print(f"\tst: {str(ck.st)}", end='')
@@ -207,7 +207,7 @@ def populate_builder(b, f):
     u8 = numpy.iinfo(numpy.int8).max
     u16 = numpy.iinfo(numpy.int16).max
     u32 = numpy.iinfo(numpy.int32).max
-    u64 = numpy.iinfo(numpy.uint64).max;
+    u64 = numpy.iinfo(numpy.uint64).max
     b.add("u8", u8, 'uint8')
     roundtrip("u8", u8, adctk.adc_types.ScalarType.cp_uint8, b)
     b.add("u16", u16, 'uint16')
@@ -261,23 +261,23 @@ def populate_builder(b, f):
     b.add("cppstr", cppstr)
     roundtrip_string("cppstr", cppstr, adctk.adc_types.ScalarType.cp_cstr, b)
 
-    cstr = "cstr_nul";
+    cstr = "cstr_nul"
     b.add("cstr1", cstr)
     roundtrip_string("cstr1", cstr, adctk.adc_types.ScalarType.cp_cstr, b)
 
-    jstr = "{\"a\":\"b\", \"c\":[1,2, 3]}";
+    jstr = "{\"a\":\"b\", \"c\":[1,2, 3]}"
     b.add_json_string("jstr1", jstr)
     roundtrip_string("jstr1", jstr, adctk.adc_types.ScalarType.cp_json_str, b)
 
-    ystr = "---\na: b\nc: [1,2, 3]\nd:\n  e: 1\n  f: 2";
+    ystr = "---\na: b\nc: [1,2, 3]\nd:\n  e: 1\n  f: 2"
     b.add_yaml_string("ystr1", ystr)
     roundtrip_string("ystr1", ystr, adctk.adc_types.ScalarType.cp_yaml_str, b)
 
-    xstr = "<note> <to>Tove</to> <from>Jani</from> </note>";
+    xstr = "<note> <to>Tove</to> <from>Jani</from> </note>"
     b.add_xml_string("xstr1", xstr)
     roundtrip_string("xstr1", xstr, adctk.adc_types.ScalarType.cp_xml_str, b)
 
-    nstr = "1234567890123456789012345678901234567890.123";
+    nstr = "1234567890123456789012345678901234567890.123"
     b.add_number_string("number1", nstr)
     roundtrip_string("number1", nstr, adctk.adc_types.ScalarType.cp_number_str, b)
     ss = b.serialize()
@@ -378,13 +378,13 @@ def populate_builder(b, f):
     cpu2 = dict()
     mem2 = dict()
 
-    host2["NAME"] = "MYHOST";
-    host2["CLUSTER"] ="MYCLUSTER";
-    cpu2["PROCESSOR"] = "PENTIUM ii";
-    mem2["SIZE"] = "256g";
-    arch2["CPU"] = cpu2;
-    arch2["MEMORY"] = mem2;
-    host2["ARCHITECTURE"] = arch2;
+    host2["NAME"] = "MYHOST"
+    host2["CLUSTER"] ="MYCLUSTER"
+    cpu2["PROCESSOR"] = "PENTIUM ii"
+    mem2["SIZE"] = "256g"
+    arch2["CPU"] = cpu2
+    arch2["MEMORY"] = mem2
+    host2["ARCHITECTURE"] = arch2
 
     b.add("host2", host2)
 
@@ -434,7 +434,7 @@ def main() -> int:
     mp.publish(b)
     mp.terminate()
 
-    return 0;
+    return 0
 
 if __name__ == "__main__":
     main()

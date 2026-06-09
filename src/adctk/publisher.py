@@ -261,7 +261,7 @@ class MultiPublisher:
     def _config_from_env(self, env_name: str, strict: bool):
         """@brief configure with list following env_name.split(":")"""
         env_val = os.getenv(env_name, "")
-        if env_val is None or len(env_val):
+        if env_val is None or not len(env_val):
             return
         plugins = env_val.split(":")
         self._config_from_list(plugins, strict)
@@ -303,6 +303,7 @@ class MultiPublisher:
         if not publisher:
             return None
         self.pvec.append(publisher)
+        print(f"DEB: Adding publisher {publisher.name()}")
         return None
 
     def publish(self, b: builder.Builder) -> int:

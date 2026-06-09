@@ -11,11 +11,12 @@ TEST_LDMS_AUTH=munge
 TEST_LDMS_PORT=412
 
 # define the plugins for the multipublisher
-TEST_ALL_PUBS="curl:file:multifile:script:stdout:syslog:ldmsd_stream_publish:ldms_message_publish"
+TEST_ALL_PUBS="http:file:multifile:script:stdout:syslog:ldmsd_stream_publish:ldms_message_publish"
 TEST_LOCAL_PUBS="file:script:stdout:multifile"
-TEST_NET_PUBS="curl:syslog:ldmsd_stream_publish:ldms_message_publish"
+TEST_NET_PUBS="http:syslog:ldmsd-system-message:ldms-system-stream"
 #serial
-TEST_ASF_PUBS="multifile:ldms_message_publish"
+TEST_ASF_PUBS="multifile:ldms-system-message:http"
+TEST_ASF_PUBS="ldms-system-message"
 
 # default the multi_publisher to node-local ones; can be overridden.
 export ADC_MULTI_PUBLISHER_NAMES=$TEST_ASF_PUBS
@@ -48,7 +49,7 @@ export ADC_CURL_PLUGIN_DIRECTORY="/dev/shm/adc"
 export ADC_CURL_PLUGIN_PROG="/usr/bin/curl"
 export ADC_CURL_PLUGIN_PORT="443"
 export ADC_CURL_PLUGIN_URL="$TEST_ADC_URL"
-export ADC_CURL_PLUGIN_DEBUG="0"
+export ADC_CURL_PLUGIN_DEBUG="2"
 
 # environment variables for file serial code plugin
 export ADC_FILE_PLUGIN_DIRECTORY="."
@@ -58,12 +59,12 @@ export ADC_FILE_PLUGIN_DEBUG="0"
 
 # environment variables for file parallel code plugin
 export ADC_MULTIFILE_PLUGIN_DIRECTORY=$ADC_FS_ROOT/$WGTEAM
-export ADC_MULTIFILE_PLUGIN_DEBUG="1"
 export ADC_MULTIFILE_PLUGIN_DEBUG="0"
+export ADC_MULTIFILE_PLUGIN_DEBUG="1"
 # Normally rank should be defined in code rather than the environment,
 # using either setenv before creating the plugin instance
 # or passing rank to the publisher config setup.
-export ADC_MULTIFILE_PLUGIN_RANK=""
+export ADC_MULTIFILE_PLUGIN_RANK="0"
 
 # environment variables for ldmsd_stream_publish subprocess plugin
 export ADC_LDMS_MESSAGE_PUBLISH_PLUGIN_DIRECTORY="/dev/shm/adc"
@@ -73,7 +74,7 @@ export ADC_LDMS_MESSAGE_PUBLISH_PLUGIN_AUTH="$TEST_LDMS_AUTH"
 export ADC_LDMS_MESSAGE_PUBLISH_PLUGIN_PORT="$TEST_LDMS_PORT"
 export ADC_LDMS_MESSAGE_PUBLISH_PLUGIN_HOST="localhost"
 export ADC_LDMS_MESSAGE_PUBLISH_PLUGIN_AFFINITY="all"
-export ADC_LDMS_MESSAGE_PUBLISH_PLUGIN_DEBUG="0"
+export ADC_LDMS_MESSAGE_PUBLISH_PLUGIN_DEBUG="1"
 
 # environment variables for ldmsd_stream_publish subprocess plugin
 export ADC_LDMSD_STREAM_PUBLISH_PLUGIN_DIRECTORY="/dev/shm/adc"

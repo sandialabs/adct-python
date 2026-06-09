@@ -128,10 +128,7 @@ class Factory:
                                               "http":{"port": "8443", "url": "localhost"}})
 
         """
-#       try:
         return publisher.MultiPublisher(strict, plugins)
-#       except:
-#           return None
 
     def __init__(self):
         pass # Factory.__init__ nothing to do

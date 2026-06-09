@@ -34,6 +34,7 @@ dev = [
 
 [project.scripts]
 adctk-publish = "adctk.scripts.adctk_publish:main"
+adctk_hello_world = "adctk.scripts.adctk_hello_world:main"
 test_adc_types = "adctk.scripts.test_adc_types:main"
 test_adctk_builder = "adctk.scripts.test_adctk_builder:main"
 test_old_builder = "adctk.scripts.test_builder:main"

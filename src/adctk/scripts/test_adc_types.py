@@ -16,7 +16,7 @@ def add2(x, name, value):
     if isinstance(value, range):
         pass
     if type(value) == int:
-        if fits_int64(value):
+        if adctk.adc_types.fits_int64(value):
             pass
         #store as cp_number_str
         pass

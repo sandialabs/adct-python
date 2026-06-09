@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adctk"
+version = "1.0.0"
+authors = [
+  { name="Stuart Baxley" },
+  { name="Gilbert Carrillo", email="gjcarri@sandia.gov" },
+  { name="Benjamin Allan", email="baallan@sandia.gov" }
+]
+description = "API for collecting application data"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "BSD-3-Clause" }
+dependencies = [
+  "numpy",
+  "requests",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.optional-dependencies]
+dev = [
+  "build",
+  "pylint",
+  "pytest",
+  "pytest-cov",
+  "twine",
+]
+
+[project.scripts]
+adctk-publish = "adctk.scripts.adctk_publish:main"
+test_adc_types = "adctk.scripts.test_adc_types:main"
+test_adctk_builder = "adctk.scripts.test_adctk_builder:main"
+test_old_builder = "adctk.scripts.test_builder:main"
+
+ldms-blob-file-to-http-post = "adctk.ldms_scripts.ldms_blob_file_to_http_post:main"
+ldms-blob-show-timing = "adctk.ldms_scripts.ldms_blob_show_timing:main"
+ldms-blob-show-timing-offset = "adctk.ldms_scripts.ldm_blob_show_offsets:main"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--cov-config=tests/.coveragerc --cov=adctk"
+testpaths = [
+    "tests",
+]

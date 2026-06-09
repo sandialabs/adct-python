@@ -1,0 +1,15 @@
+[run]
+omit =
+        tests/*
+
+[report]
+omit =
+        tests/*
+        */__init__.py
+        __init__*
+
+# Regexes for lines to exclude from consideration
+exclude_lines =
+    if __name__ == .__main__.:
+
+show_missing=true

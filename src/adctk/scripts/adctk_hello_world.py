@@ -20,6 +20,9 @@ def main() -> int:
 
     # create a factory
     f = adctk.Factory()
+    avail = f.get_publisher_names()
+    print(f"available publishers are: {avail}")
+    print(f'ADC_MULTI_PUBLISHER_NAMES is: {os.getenv("ADC_MULTI_PUBLISHER_NAMES")}')
 
     # create a message and add header
     b = f.get_builder()

@@ -329,14 +329,20 @@ class MultiPublisher:
 
     def pause(self) -> None:
         """! pause() all configured publishers"""
-        print(f"PAUSING {len(self.pvec)} PUBLISHERS")
+        # print(f"PAUSING {len(self.pvec)} PUBLISHERS")
         for pub in self.pvec:
             pub.pause()
         self.paused = True
 
     def resume(self) -> None:
         """! resume() all configured publishers"""
-        print(f"RESUMING {len(self.pvec)} PUBLISHERS")
+        # print(f"RESUMING {len(self.pvec)} PUBLISHERS")
         for pub in self.pvec:
             pub.resume()
         self.paused = False
+
+    def get_names(self) -> list[str]:
+        n = []
+        for i in self.pvec:
+            n.append(i.name())
+        return n

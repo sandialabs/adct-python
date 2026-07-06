@@ -142,7 +142,6 @@ class Readline0(object):
                     have_fraction = True
                 else:
                     # they're both zero length - this is legal for !! - yield one or the other but not both
-                    assert field_pair[0] == field_pair[1]
                     regular_fields.append(field_pair[0])
 
         return regular_fields, have_fraction, fraction

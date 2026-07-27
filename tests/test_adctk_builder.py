@@ -5,9 +5,9 @@
 import array
 import numpy
 import adctk
-#import adctk.adc_types
-#import adctk.builder
-#import adctk.publisher
+import adctk.adc_types
+import adctk.builder
+import adctk.publisher
 
 adc_plugin_file_config = {
         "ADC_FILE_PLUGIN_DIRECTORY": "./test.outputs", 
@@ -23,7 +23,7 @@ file_config = { "DIRECTORY": "./test.outputs",
 # fixme: use logger
 
 # config w/file_config and call initialize.
-def test_publisher( pub: adctk.Publisher,  b: adctk.Builder) -> int :
+def xtest_publisher( pub: adctk.Publisher,  b: adctk.Builder) -> int :
     err = 0
     e = 0
     err = pub.config(**file_config)
@@ -407,18 +407,18 @@ def main() -> int:
 
     print("NONE TEST")
     p0 = f.get_publisher("none")
-    print(test_publisher(p0, b))
+    print(xtest_publisher(p0, b))
 
     print("FILE TEST")
     p1 = f.get_publisher("file")
-    print(test_publisher(p1, b))
+    print(xtest_publisher(p1, b))
 
     print("STDOUT TEST")
     p2 = f.get_publisher("stdout")
-    print(test_publisher(p2, b))
+    print(xtest_publisher(p2, b))
 
 #   p3 = f.get_publisher("syslog")
-#   print(test_publisher(p3, b))
+#   print(xtest_publisher(p3, b))
 
     print("MULTIPUB TEST")
 

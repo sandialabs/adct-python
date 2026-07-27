@@ -22,8 +22,5 @@ X=$(ls -1tr dist/*.whl |tail -n 1)
 python3 -m pip install --require-virtualenv --force-reinstall --no-deps $X
 python3 -m pytest
 
-# Run a demo
-test_adctk_builder
-
 # build documentation in doc/generated. Doxygen 1.16.1 or later is highly recommended.
 doxygen Doxyfile

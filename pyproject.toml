@@ -6,9 +6,9 @@ build-backend = "setuptools.build_meta"
 name = "adctk"
 version = "1.0.0"
 authors = [
-  { name="Stuart Baxley" },
+  { name="Benjamin Allan", email="baallan@sandia.gov" },
   { name="Gilbert Carrillo", email="gjcarri@sandia.gov" },
-  { name="Benjamin Allan", email="baallan@sandia.gov" }
+  { name="Stuart Baxley" }
 ]
 description = "API for collecting application data"
 readme = "README.md"
@@ -20,8 +20,16 @@ dependencies = [
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "Operating System :: OS Independent",
+    "Operating System :: POSIX :: Linux",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Topic :: Scientific/Engineering",
+    "Topic :: System :: Monitoring",
+    "Development Status :: 5 - Production/Stable"
 ]
+[urls]
+Repository = "https://github.com/sandialabs/adct-python"
+Documentation = "https://sandialabs.github.io/adct-python/index.html"
 
 [project.optional-dependencies]
 dev = [

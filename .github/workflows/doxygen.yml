@@ -9,9 +9,8 @@ on:
       - main
 
 jobs:
-  doxygen-docs:
+  build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -19,9 +18,9 @@ jobs:
       - name: Doxygen setup
         run: |
           sudo apt-get install -y doxygen graphviz
-
-    - name: Clean Old Documentation Builds
-      run: |
+          
+      - name: Clean Old Documentation Builds
+        run: |
         rm -rf doc/generated
 
       - name: Generate Doxygen
@@ -29,12 +28,12 @@ jobs:
           doxygen --version
           doxygen Doxyfile
 
-    - name: Upload Documentation Artifact
-      # This step uploads the HTML files for deployment, but only on the main branch
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-      uses: actions/upload-pages-artifact@v5
-      with:
-        path: doc/generated/html
+      - name: Upload Documentation Artifact
+        # This step uploads the HTML files for deployment, but only on the main branch
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: doc/generated/html
 
   deploy-docs:
     # Only run this job on a push to the main branch, after the build job succeeds

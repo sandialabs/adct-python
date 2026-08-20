@@ -21,7 +21,7 @@ jobs:
           
       - name: Clean Old Documentation Builds
         run: |
-        rm -rf doc/generated
+          rm -rf doc/generated
 
       - name: Generate Doxygen
         run: |

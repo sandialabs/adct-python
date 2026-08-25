@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "adctk"
-version = "1.0.0"
+version = "1.0.0-1"
 authors = [
   { name="Benjamin Allan", email="baallan@sandia.gov" },
   { name="Gilbert Carrillo", email="gjcarri@sandia.gov" },

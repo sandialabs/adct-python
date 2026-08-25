@@ -24,3 +24,10 @@ python3 -m pytest
 
 # build documentation in doc/generated. Doxygen 1.16.1 or later is highly recommended.
 doxygen Doxyfile
+
+# pypi release
+# activate pypi/venv-pypi 
+# To upload to pypi.org after build to empty dist/ folder, set up ~/.pypirc and pypi user account,
+# per https://packaging.python.org/en/latest/tutorials/packaging-projects/, then
+# python3 -m twine upload --verbose --repository pypi dist/*
+# or set up auto-release via github

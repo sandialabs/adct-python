@@ -1,0 +1,31 @@
+name: Package Source Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  archive-source:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v5
+      with:
+        submodules: recursive # Ensures submodules are fetched if you use them
+
+    - name: Pack Archive
+      run: |
+        # Use git archive to bundle files while respecting your .gitattributes files
+        git archive --format=tar.gz --prefix=adct-python-${{ github.ref_name }}/ -o adct-python-${{ github.ref_name }}.tar.gz HEAD
+
+    - name: Create Release and Upload Archive
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        gh release create "${{ github.ref_name }}" \
+          --title "adct-python-${{ github.ref_name }}" \
+          --generate-notes \
+          "adct-python-${{ github.ref_name }}.tar.gz"

@@ -80,3 +80,4 @@ from .adc_types import ScalarType
 from .adc_types import KeyType
 from .adc_types import Field
 from .adc_version import AdcVersion
+from .uuid_compat import UUID7Generator

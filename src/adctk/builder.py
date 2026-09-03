@@ -14,7 +14,6 @@ import platform
 import sys
 import os
 import getpass
-import uuid
 import datetime
 import time
 import collections.abc
@@ -24,6 +23,7 @@ import array
 import numpy
 
 #from adctk.log import logger
+from . import uuid_compat
 from . import adc_version
 from . import adc_types
 from . import log
@@ -710,6 +710,8 @@ class Builder():
             Where possible (requires coordination at all workflow levels)
                 export ADC_WFID_PATH=(higher_level_wfid_path)/$ADC_WFID
             the entire task hierarchy identifier can be collected.
+
+            The choice of uuid version is up to the user.
         """
 
         b = Builder()
@@ -1223,5 +1225,5 @@ class Header(Builder):
         self._set_attr("user", getpass.getuser())
         self._set_attr("uid", str(os.getuid()))
         self._set_attr("application" , application)
-        self._set_attr("uuid", str(uuid.uuid4()))
+        self._set_attr("uuid", str(uuid_compat.UUID7Generator.uuid7()))
         # print(f"CTOR:HEADER:{self.serialize()}")

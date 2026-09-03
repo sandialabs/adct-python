@@ -10,13 +10,14 @@ authors = [
   { name="Gilbert Carrillo", email="gjcarri@sandia.gov" },
   { name="Stuart Baxley" }
 ]
-description = "API for collecting application data"
+description = "API for collecting scientific application data"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "BSD-3-Clause"
 dependencies = [
   "numpy",
   "requests",
+  "uuid6"
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -38,6 +39,7 @@ dev = [
   "pytest-cov",
   "twine",
 ]
+
 
 [project.scripts]
 adctk-publish = "adctk.scripts.adctk_publish:main"

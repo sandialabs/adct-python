@@ -48,7 +48,7 @@ jobs:
 
   deploy-docs:
     # Only run this job on a push to the main branch, after the build job succeeds
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'sandialabs/adct-python'
     needs: build
     runs-on: ubuntu-latest
     environment:

@@ -4,9 +4,41 @@
 
 import os
 import adctk
+import io
+import base64
+import zlib
+import struct
+
+def get_png_mime():
+    """Generates a grid png."""
+    png_header = b'\x89PNG\r\n\x1a\n'
+    height = 128
+    width=128
+    ihdr_data = struct.pack("!IIBBBBB", width, height, 8, 2, 0, 0, 0)
+    ihdr_chunk = b'IHDR' + ihdr_data
+    ihdr_crc = struct.pack("!I", zlib.crc32(ihdr_chunk))
+    ihdr = struct.pack("!I", len(ihdr_data)) + ihdr_chunk + ihdr_crc
+
+    raw_data = bytearray()
+    for y in range(height):
+        raw_data.append(0)  # Filter type 0 for each scanline row
+        for x in range(width):
+            color = 255 if ((x // 16) + (y // 16)) % 2 == 0 else 0
+            raw_data.extend([color, color, color]) # R, G, B bytes
+    idat_data = zlib.compress(raw_data)
+    idat_chunk = b'IDAT' + idat_data
+    idat_crc = struct.pack("!I", zlib.crc32(idat_chunk))
+    idat = struct.pack("!I", len(idat_data)) + idat_chunk + idat_crc
+    iend_chunk = b'IEND'
+    iend_crc = struct.pack("!I", zlib.crc32(iend_chunk))
+    iend = struct.pack("!I", 0) + iend_chunk + iend_crc
+    x = png_header + ihdr + idat + iend
+    return f"{base64.b64encode(x).decode('utf-8')}"
+
 #*! \file adcHelloWorld.py
 #  This demonstrates using the adctk.factory API to build and publish a message.
-#  The message sent includes the bare minimum, plus hello world and host data.
+#  The message sent includes the bare minimum, plus hello world and host data
+#  and a trivial mime-encoded png.
 
 #! \addtogroup examples
 #  @{
@@ -31,6 +63,8 @@ def main() -> int:
     # add an application-defined payload to the message
     app_data = f.get_builder()
     app_data.add("hello", "world")
+    img = get_png_mime()
+    app_data.add_mime("grid1", "image/png", "base64", "test.png", img)
     b.add_app_data_section(app_data)
 
     # add environment chunks of interest on at least the first message in production

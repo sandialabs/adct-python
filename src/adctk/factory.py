@@ -79,6 +79,8 @@ class Factory:
                 x.config(options)
                 x.initialize()
                 return x
+        if not isinstance(name, str):
+            raise ValueError(f"get_publisher expects a string name: got {name}")
         return None
 
     @staticmethod

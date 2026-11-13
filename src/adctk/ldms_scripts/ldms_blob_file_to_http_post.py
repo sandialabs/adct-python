@@ -196,8 +196,8 @@ import json
 import binascii
 import argparse
 import traceback
-from adctk.publishers.http_publisher import HttpPublisher
-from adctk.publishers.debug_file_publisher import DebugFilePublisher
+from adctk.http_publisher import HttpPublisher
+from adctk.debug_file_publisher import DebugFilePublisher
 
 class Blob:
     def __init__(self, index, databytes, timestamp, stype='s'):
@@ -427,10 +427,14 @@ class PostFilter(BlobScanner):
                 self.publisher = DebugFilePublisher(url)
             else:
                 print("Writing to server", url);
-                self.publisher = HttpPublisher(url)
+                self.publisher = HttpPublisher()
+                self.publisher.config(url=url)
+                self.publisher.initialize()
         else:
             print("Writing to default server");
             self.publisher = HttpPublisher()
+            self.publisher.initialize()
+            print(f"Default server is {self.publisher._base_url}:{self.publisher._base_port}/log");
 
     def add(self, b):
         """@return 0 if published, 1 if message is not json, 2 if a retry may be needed"""
@@ -464,7 +468,7 @@ class PostFilter(BlobScanner):
                 return 2
         else:
             status_code = status.status_code
-            if status_code in [200, 201, 202]:
+            if status_code in [200, 201, 202, 409]:
                 if self.completed_dir:
                     print("line {}: {}: {}".format(b.index, status_code, status.json()), file=self.pfile)
                 if self.log_dir:
@@ -509,12 +513,12 @@ class PostFilter(BlobScanner):
                 print("Warning: file {} and destination {} are same directory. Move request ignored.".format(datfile, destdir), file=self.lfile)
             return 0
         os.replace(datfile, os.path.join(destdir, os.path.basename(datfile)));
-        # print("Debug: file {} moved to {}".format(datfile, destdir), file=self.lfile)
+        #print("Debug: file {} moved to {}".format(datfile, destdir), file=self.lfile)
         otherfiles = [self.breader.filetiming_always__name, self.breader.filestype_name, self.breader.fileoffset_name]
         for f in otherfiles:
             if os.path.exists(f):
                 os.replace(f, os.path.join(destdir, os.path.basename(f)));
-                # print("Debug: file {} moved to {}".format(f, destdir), file=self.lfile)
+                #print("Debug: file {} moved to {}".format(f, destdir), file=self.lfile)
 
 def main():
     parser = argparse.ArgumentParser(description="Generate ADC web posts from ldms json stream files.")

@@ -17,6 +17,7 @@ TEST_NET_PUBS="http:syslog:ldmsd-system-message:ldms-system-stream"
 #serial
 TEST_ASF_PUBS="multifile:ldms-system-message:http"
 TEST_ASF_PUBS="ldms-system-message"
+TEST_ASF_PUBS=stdout
 
 # default the multi_publisher to node-local ones; can be overridden.
 export ADC_MULTI_PUBLISHER_NAMES=$TEST_ASF_PUBS
@@ -69,7 +70,7 @@ export ADC_MULTIFILE_PLUGIN_RANK="0"
 # environment variables for ldmsd_stream_publish subprocess plugin
 export ADC_LDMS_MESSAGE_PUBLISH_PLUGIN_DIRECTORY="/dev/shm/adc"
 export ADC_LDMS_MESSAGE_PUBLISH_PLUGIN_PROG="/usr/sbin/ldms_message_publish"
-export ADC_LDMS_MESSAGE_PUBLISH_PLUGIN_CHANNEL="adc_publish_api"
+export ADC_LDMS_MESSAGE_PUBLISH_PLUGIN_TAG="adc_publish_api"
 export ADC_LDMS_MESSAGE_PUBLISH_PLUGIN_AUTH="$TEST_LDMS_AUTH"
 export ADC_LDMS_MESSAGE_PUBLISH_PLUGIN_PORT="$TEST_LDMS_PORT"
 export ADC_LDMS_MESSAGE_PUBLISH_PLUGIN_HOST="localhost"
@@ -96,7 +97,7 @@ export ADC_LIBCURL_PLUGIN_PORT=443
 export ADC_LIBCURL_PLUGIN_URL="$TEST_ADC_URL"
 
 # environment variables for libldms_msg plugin
-export ADC_LIBLDMS_MSG_PUBLISH_PLUGIN_CHANNEL="adc_publish_api"
+export ADC_LIBLDMS_MSG_PUBLISH_PLUGIN_TAG="adc_publish_api"
 export ADC_LIBLDMS_MSG_PUBLISH_PLUGIN_AUTH="$TEST_LDMS_AUTH"
 export ADC_LIBLDMS_MSG_PUBLISH_PLUGIN_PORT="$TEST_LDMS_PORT"
 export ADC_LIBLDMS_MSG_PUBLISH_PLUGIN_HOST="localhost"
